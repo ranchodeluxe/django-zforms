@@ -1,80 +1,0 @@
-10
-
-dir
-675
-http://scm/scm/svn/zcrowd/django/server/trunk/common
-http://scm/scm/svn/zcrowd
-
-
-
-2014-07-21T17:19:06.793000Z
-667
-gcorradini
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-f01cb49c-fcaf-4bf8-82ce-c8cf1dede397
-
-forms
-dir
-
-__init__.py
-file
-
-
-
-
-2014-07-21T16:45:22.811227Z
-d41d8cd98f00b204e9800998ecf8427e
-2013-05-31T19:46:55.332689Z
-26
-idbill
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-0
-
-mixins
-dir
-
-functions
-dir
-
-model_inspection
-dir
-
-management
-dir
-
-classes
-dir
-
