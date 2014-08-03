@@ -1,0 +1,35 @@
+<html>
+<head>
+</head>
+<body>
+{% if message %}
+    <p><b>STATUS:</b> {{ message }}</p>
+{% endif %}
+{% comment %}
+{% if form.errors or form.non_field_errors %}
+<div class="validation top error">
+    <h2>Errors prevented this task from completing</h2>
+    <h3>Please correct them and resubmit</h3>     
+    <ul class="errorlist">
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors.items %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    {% endif %}
+    {% if form.errors %}
+        {% for error in form.errors.items %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    {% endif %}
+    </ul>
+</div>
+{% endif %}
+{% endcomment %}
+<form action="{{ link }}" method="post">{% csrf_token %}
+{% for field in form %}
+    <div>{{ field.label }}{{ field }}<span class="errors">{%if field.errors %}{% for error in field.errors %}{{ error|escape }}{% endfor %}{% endif %}</span></div>
+{% endfor %}
+<button type="submit">Submit</button>
+</form>
+</body>
+</html>

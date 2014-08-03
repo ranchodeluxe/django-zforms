@@ -1,0 +1,6 @@
+Django==1.6.1
+django-extensions
+MySQL-python
+pytz
+python-dateutil
+beautifulsoup4

@@ -1,0 +1,3 @@
+virtualenv --python=python2.7 pyvenv
+source pyvenv/bin/activate
+pip install -r requirements.txt

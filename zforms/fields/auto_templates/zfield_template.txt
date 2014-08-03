@@ -1,0 +1,62 @@
+#
+#  django imports
+#
+from django import forms
+from django.forms.fields import *
+from django.core import validators
+from django.utils.safestring import mark_safe
+from django.core.exceptions import ValidationError
+
+#
+#  system imports
+#
+import logging
+import json
+logger = logging.getLogger( __file__ )
+
+#
+#  app imports
+#
+
+{% for zcrowd_widget_name in all_project_widgets %}
+
+class {{ client_name }}_{{ zcrowd_widget_name }}( {{ zcrowd_widget_name }} ):
+
+    def __init__(self, *args, **kwargs):
+        super( {{ client_name }}_{{ zcrowd_widget_name }} , self ).__init__( *args, **kwargs )
+        
+        #
+        #  handle post init programming
+        #
+
+    def to_python( self, value ):
+        parent_value = super( {{ client_name }}_{{ zcrowd_widget_name }}, self).to_python( value )
+    
+        #
+        #  handle extra value checking
+        #
+
+        return parent_value
+
+    def validate(self, value):
+        super( {{ client_name }}_{{ zcrowd_widget_name }}, self ).validate( value )
+
+    def clean( self, value ):
+        value = self.to_python(value)
+        self.validate(value)
+        self.run_validators(value)
+
+
+        #
+        #  handle extra clean logic here
+        #
+
+        return value
+
+
+
+{% endfor %}
+
+
+
+
