@@ -53,6 +53,26 @@ class zRadioSelectSubclassCase( zFormTestCase ):
         self.assertEqual( input_tag.attrs.get( 'checked', None ), 'checked' )
         logger.debug( "\n==================================================\n" )
 
+    def test_choices_override_args( self ):
+        logger.debug( "\n" )
+        self.form.fields[ 'name' ] = sRadioSelect( **{
+                'id' : 'tinker_bot' ,
+                'choices' :  (
+                    ( True,  'Yes' ) ,
+                    ( False, 'No' ) 
+                )
+            } )
+        rendering = self.form.as_p()
+        logger.debug( "[ RENDERED FORM ]: %s\n" % rendering )
+        soup = BS( rendering )
+        nametag, tag, tag1 = soup.find_all( 'label' )
+        logger.debug( "[ TAG ATTRS ]: %s" % tag.attrs )
+
+        #  assert lots
+        self.assertEqual( tag.get_text(), ' Yes' )
+        self.assertEqual( tag1.get_text(), ' No' )
+        logger.debug( "\n==================================================\n" )
+
 
     #
     #  RENDERING TESTS ( HTML ATTRIBUTE OVERRIDES )

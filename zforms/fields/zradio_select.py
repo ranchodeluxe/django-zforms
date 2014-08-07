@@ -55,9 +55,12 @@ class zRadioSelect( HTMLAttributeOverrides, ChoiceField ):
 
         '''
         args, kwargs = self._set_overrides( *args, **kwargs )
+        self.choices_override = kwargs.get( 'choices', None )
+        if self.choices_override is not None:
+            del kwargs[ 'choices' ]
         super( zRadioSelect, self ).__init__( *args, **kwargs )
         self.widget = forms.RadioSelect( renderer=HorizontalRadioRenderer )
-        self.choices = BOOL_CHOICES
+        self.choices = self.choices_override if self.choices_override is not None else BOOL_CHOICES 
         extra_attrs = self.widget_attrs( self.widget )
         if extra_attrs:
             self.widget.attrs.update( extra_attrs )

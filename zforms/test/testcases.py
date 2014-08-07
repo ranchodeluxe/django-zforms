@@ -1,5 +1,5 @@
 from django import forms
-from django.test import TestCase
+from django.test import TestCase, SimpleTestCase
 from django.test.client import Client
 from django.test.client import RequestFactory
 
@@ -17,7 +17,7 @@ from fields.zradio_select import zRadioSelect
 '''
 
 
-class zFormTestCase( TestCase ):
+class zFormTestCase( SimpleTestCase ):
 
     @classmethod
     def setUpClass(cls):
