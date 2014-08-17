@@ -32,6 +32,7 @@ class zSelect( HTMLAttributeOverrides, ChoiceField ):
     
             default instance-level attributes on Field: 
             ===========================================
+            self.choices
             self.required
             self.widget
             self.label
@@ -53,6 +54,10 @@ class zSelect( HTMLAttributeOverrides, ChoiceField ):
 
     def validate(self, value):
         super( zSelect, self ).validate( value )
+
+        if value == '': # default value is not allowed as valid
+            raise ValidationError( 'you must select one of the options' )
+            
 
     def clean( self, value ):
         value = self.to_python(value)

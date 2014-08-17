@@ -166,5 +166,35 @@ class sRadioSelect(  zRadioSelect ):
         return True if value == 'True' else False
 
 
+class sSelect(  zSelect ):
+
+    def __init__(self, *args, **kwargs):
+        super( sSelect, self ).__init__( *args, **kwargs )
+
+    def to_python( self, value ):
+        parent_value = super( sSelect, self ).to_python( value )
+        return parent_value
+
+    def validate(self, value):
+        super( sSelect, self ).validate( value )
+
+        #
+        #  extra validation logic here
+        #  runs before validators are called
+        #  must throw ValidationError
+        #
+
+
+    def clean( self, value ):
+        value = self.to_python(value)
+        self.validate(value)
+        self.run_validators(value)
+
+        #
+        #  extra validation logic here
+        #
+        return value
+
+
 
 

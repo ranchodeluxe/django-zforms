@@ -43,6 +43,7 @@ class zRadioSelect( HTMLAttributeOverrides, ChoiceField ):
     
             default instance-level attributes on Field: 
             ===========================================
+            self.choices
             self.required
             self.widget
             self.label
