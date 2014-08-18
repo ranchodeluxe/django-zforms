@@ -115,7 +115,7 @@ class HTMLAttributeOverrides( object ):
     def widget_attrs( self, widget ):
         attrs = super( HTMLAttributeOverrides, self ).widget_attrs( widget )
 
-        if isinstance( widget, TextInput ) or isinstance( widget, Textarea ):
+        if isinstance( widget, TextInput ) or isinstance( widget, Textarea ) or isinstance( widget, HiddenInput ):
             for attr in self._chartype_html_attrs: attrs.update( attr )
 
         # add standard HTML attributes
