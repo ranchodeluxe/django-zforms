@@ -13,6 +13,7 @@ class FIELD_TYPES( ENUM_TYPE ):
     SelectMultipleField = 'zSelectMultiple' # no Django type, ChoiceField with widget, fake it
     DateField = 'zDateInput'
     DateTimeField = 'zDateTimeInput'
+    HiddenField = 'zHiddenInput'
 
 class WIDGET_TYPES( ENUM_TYPE ):
     #
@@ -29,10 +30,13 @@ class WIDGET_TYPES( ENUM_TYPE ):
     zSelectMultiple = 'SelectMultiple'
     zDateInput = 'DateInput'
     zDateTimeInput = 'DateTimeInput'
+    zHiddenInput = 'HiddenInput'
     
 from ztext_input import zTextInput
 from ztext_area import zTextArea
 from zcheck_box import zCheckBox
 from zselect import zSelect
 from zradio_select import zRadioSelect
+from zhidden_input import zHiddenInput
+from zplain_text_input import zPlainTextInput
 

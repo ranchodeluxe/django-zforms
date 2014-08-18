@@ -24,6 +24,8 @@ from ztext_area import zTextArea
 from zcheck_box import zCheckBox
 from zselect import zSelect
 from zradio_select import zRadioSelect
+from zhidden_input import zHiddenInput
+from zplain_text_input import zPlainTextInput
 
 class sTextInput(  zTextInput ):
 
@@ -194,6 +196,85 @@ class sSelect(  zSelect ):
         #  extra validation logic here
         #
         return value
+
+
+class sHiddenInput(  zHiddenInput ):
+
+    def __init__(self, *args, **kwargs):
+        self.is_date = kwargs.get( 'is_date', False )
+        if self.is_date: del kwargs[ 'is_date' ]
+        super( sHiddenInput, self ).__init__( *args, **kwargs )
+
+    def to_python( self, value ):
+        parent_value = super( sHiddenInput, self ).to_python( value )
+        return parent_value
+
+    def validate(self, value):
+        super( sHiddenInput, self ).validate( value )
+
+        #
+        #  extra validation logic here
+        #  runs before validators are called
+        #  must throw ValidationError
+        #
+
+
+    def clean( self, value ):
+        value = self.to_python(value)
+        self.validate(value)
+        if self.required:
+            self.run_validators(value)
+
+        if value != '':
+            self.run_validators(value)
+
+        #
+        #  extra validation logic here
+        #
+        if self.is_date:
+            try: 
+                parser.parse( value )
+            except TypeError:
+                raise ValidationError('the date was not parsable as a date')
+
+        #
+        #  extra validation logic here
+        #
+        return value
+
+
+class sPlainTextInput( zPlainTextInput ):
+
+    def __init__(self, *args, **kwargs):
+        super( sPlainTextInput, self ).__init__( *args, **kwargs )
+
+    def to_python( self, value ):
+        parent_value = super( sPlainTextInput, self ).to_python( value )
+        return parent_value
+
+    def validate(self, value):
+        super( sPlainTextInput, self ).validate( value )
+
+        #
+        #  extra validation logic here
+        #  runs before validators are called
+        #  must throw ValidationError
+        #
+
+
+    def clean( self, value ):
+        value = self.to_python(value)
+        self.validate(value)
+        self.run_validators(value)
+
+        #
+        #  extra validation logic here
+        #
+        return value
+
+
+
+
 
 
 

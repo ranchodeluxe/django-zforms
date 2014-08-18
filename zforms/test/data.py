@@ -43,21 +43,6 @@ example_input1 = {
                 'initial' : 'Bob Ross'
             }
         } ,
-    ] ,
-    'grade' : {
-        'type' : 'zSelect' ,
-        'disabled' : False, 
-        'readonly' : False, 
-        'required' : True ,
-        'choices'  : (
-            ('A', 'A - Perfect!! No editing needed (Approved)'), 
-            ('C', 'C - Good Enough. Some editing needed (Approved)'), 
-            ('B', 'B - Nicely Done! Little editing needed (Approved)'), 
-            ('D', 'D - Lots of editing needed (Approved, But NO BONUS)'), 
-            ('G', '0 - Cheating (Rejection)'), 
-            ('F', 'F - Unusable (Rejection)'), 
-            ('', '--- Select Grade ---')
-        ) ,
-    }
+    ]
 }
 
