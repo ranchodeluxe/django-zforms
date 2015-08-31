@@ -1,7 +1,7 @@
 Django-zForms
 =================
 
-There are some people out there who still render HTML form fields with Django/Python. While using forms for server-side validation makes sense ( and only in some cases ), using them as renderers is only be useful in the simplest of situations or else it gets ugly fast.
+There are some people out there who still render HTML form fields with Django/Python. While using forms for server-side validation makes sense ( and only in some cases ), using them to render might only be useful in the simplest of situations or else it gets ugly fast.
 
 Goal(s)
 -------------
