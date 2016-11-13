@@ -2,21 +2,18 @@
 #  django imports
 #
 from django.core import validators
-from django.core.exceptions import ValidationError
 from django.forms.widgets import *
 
 #
 #  sys imports
 #
 import re
-import inspect
 import logging
 logger = logging.getLogger( __file__ )
 
 #
 #  app imports
 #
-from zforms.fields import FIELD_TYPES, WIDGET_TYPES
 
 class HTMLAttributeOverrides( object ):
     '''
