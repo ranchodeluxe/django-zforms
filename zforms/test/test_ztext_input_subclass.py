@@ -1,11 +1,7 @@
-from django import forms
-from django.conf.urls import patterns, url, include
-
-import uuid
-import re
 import logging
-from dateutil import parser
+
 from datetime import datetime
+
 logger = logging.getLogger( __file__ )
 from bs4 import BeautifulSoup as BS
 
@@ -64,7 +60,7 @@ class zTextInputSubclassCase( zFormTestCase ):
         logger.debug( "[ LABEL TAG ATTRS ]: %s\n" % label_tag.attrs )
 
         #  assert lots
-        self.assertEqual( input_tag.attrs.get( 'required', None ), 'required' )
+        self.assertIsNotNone( input_tag.attrs.get( 'required', None ) )
         self.assertEqual( label_tag.get_text(), 'stupid is:' )
         self.assertEqual( input_tag[ 'value' ], 'stupid does' )
         logger.debug( "\n==================================================\n" )

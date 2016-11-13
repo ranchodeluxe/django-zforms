@@ -1,19 +1,11 @@
-from django import forms
-from django.conf.urls import patterns, url, include
-
-import uuid
-import re
 import logging
-from dateutil import parser
-from datetime import datetime
+
+from django import forms
+
 logger = logging.getLogger( __file__ )
 from bs4 import BeautifulSoup as BS
 
-from zforms.fields.ztext_input import zTextInput
-from zforms.fields.ztext_area import zTextArea
 from zforms.fields.zcheck_box import zCheckBox
-from zforms.fields.zselect import zSelect
-from zforms.fields.zradio_select import zRadioSelect
 from zforms.test.testcases import zFormTestCase
 
 
@@ -53,7 +45,7 @@ class zCheckBoxCase( zFormTestCase ):
         logger.debug( "[ LABEL TAG ATTRS ]: %s\n" % label_tag.attrs )
 
         #  assert lots
-        self.assertEqual( input_tag.attrs.get( 'required', None ), 'required' )
+        self.assertIsNotNone( input_tag.attrs.get( 'required', None ) )
         self.assertEqual( label_tag.get_text(), 'stupid is:' )
         self.assertEqual( input_tag.attrs.get( 'checked', None ), 'checked' )
         logger.debug( "\n==================================================\n" )

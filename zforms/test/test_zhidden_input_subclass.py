@@ -1,11 +1,7 @@
-from django import forms
-from django.conf.urls import patterns, url, include
-
-import uuid
-import re
 import logging
-from dateutil import parser
+
 from datetime import datetime
+
 logger = logging.getLogger( __file__ )
 from bs4 import BeautifulSoup as BS
 
