@@ -17,20 +17,6 @@ class DynTestForm( DynFieldMixin, forms.Form ):
         super( DynTestForm, self ).__init__( *args, **kwargs )
         self._build_dynamic_fields( example_input )
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #
 #
 #  example of an auto-generated form
