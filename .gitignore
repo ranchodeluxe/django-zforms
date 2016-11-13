@@ -2,4 +2,6 @@ dist/
 build/
 venv/pyvenv
 *.pyc
+.idea/
+venv/
 mydatabase
