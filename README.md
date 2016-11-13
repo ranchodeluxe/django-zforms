@@ -14,7 +14,7 @@ render forms on the server based on JSON configurations and without a Django mod
 
 ## API Frustrations
 
-0. Django uses base `Field` and `Widget` classes to try and create a separation of concern for rendering and validating forms.
+Django uses base `Field` and `Widget` classes to try and create a separation of concern for rendering and validating forms.
 The `Field` is responsible for higher-level concerns such as coordinating validation, the rendering of multiple inputs and wrapping
 inputs in help text. Each `Widget` is really about defining sane element attribute defaults and then rendering that element.
 
@@ -31,11 +31,14 @@ here's how we create a `<textarea>` element since there is no high-level `Field`
     In [40]: form.as_p()
     Out[40]: u'<p><label for="id_comment">Comment:</label> <textarea cols="40" id="id_comment" name="comment" rows="10" required>\r\n</textarea></p>'
     ```
+
 Something about this API feels wrong. As a programmer I want to say, "I need a Textarea element".
 I do not want to say, "I need a CharField with a Textarea override". The fact that `CharField` has code reuse for `Textarea`s,
 `TextInput`s and `CheckBox`s should be abstracted away from the API and yet still provide override options.
 
-0. Then there's the issue of where to pass element attributes for rendering versus for functional use. For example, let's say
+---
+
+Then there's the issue of where to pass element attributes for rendering versus for functional use. For example, let's say
 I want a `<input type="text"/>` field with some custom `data-*` attributes that my Javascript will key off of. I also want
 this field to NOT be `required`, meaning it can be empty on a POST.
 
