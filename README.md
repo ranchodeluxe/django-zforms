@@ -21,16 +21,16 @@ inputs in help text. Each `Widget` is really about defining sane element attribu
 In practice though, this is often confusing. It forces the developer to know something about the API. For example,
 here's how we create a `<textarea>` element since there is no high-level `Field` subclass:
 
-    ```python
-    In [36]: from django.forms import Form; from django.forms.fields import *; from django.forms.widgets import *
+```python
+In [36]: from django.forms import Form; from django.forms.fields import *; from django.forms.widgets import *
 
-    In [37]: form = Form()
+In [37]: form = Form()
 
-    In [38]: form.fields['comment'] = CharField(widget=Textarea)
+In [38]: form.fields['comment'] = CharField(widget=Textarea)
 
-    In [40]: form.as_p()
-    Out[40]: u'<p><label for="id_comment">Comment:</label> <textarea cols="40" id="id_comment" name="comment" rows="10" required>\r\n</textarea></p>'
-    ```
+In [40]: form.as_p()
+Out[40]: u'<p><label for="id_comment">Comment:</label> <textarea cols="40" id="id_comment" name="comment" rows="10" required>\r\n</textarea></p>'
+```
 
 Something about this API feels wrong. As a programmer I want to say, "I need a Textarea element".
 I do not want to say, "I need a CharField with a Textarea override". The fact that `CharField` has code reuse for `Textarea`s,
@@ -47,35 +47,36 @@ be rendered with a `required` attribute unless you tell it not to. `required` in
 is not only a rendering consideration it's a functional one for validation. So that functional consideration is passed to the
 `Field` subclass but not the `Widget`.
 
-    ```python
-    In [59]: form.fields['comment'] = CharField(required=False, widget=TextInput(attrs={"data-id": "12345", "data-type": "comment"}
-        ...: ))
+```python
+In [59]: form.fields['comment'] = CharField(required=False, widget=TextInput(attrs={"data-id": "12345", "data-type": "comment"}
+    ...: ))
 
-    In [60]: form.as_p()
-    Out[60]: u'<p><label for="id_comment">Comment:</label> <input data-id="12345" data-type="comment" id="id_comment" name="comment" type="text" /></p>'
-    ```
+In [60]: form.as_p()
+Out[60]: u'<p><label for="id_comment">Comment:</label> <input data-id="12345" data-type="comment" id="id_comment" name="comment" type="text" /></p>'
+```
 
 That's interesting. The `Field` subclasses also take an `initial` argument for the `value` attribute. But `value` is a just another HTML attribute
 on an element, so `Widget` would override that because it handles the rendering too. Not quite.
 
-    ```python
-    In [75]: form.fields['comment'] = CharField(required=False, initial='blah', widget=TextInput(attrs={"data-id": "12345", "data-t
-        ...: ype": "comment", "value": "blah2"}))
+```python
+In [75]: form.fields['comment'] = CharField(required=False, initial='blah', widget=TextInput(attrs={"data-id": "12345", "data-t
+    ...: ype": "comment", "value": "blah2"}))
 
-    In [76]: form.as_p()
-    Out[76]: u'<p><label for="id_comment">Comment:</label> <input data-id="12345" data-type="comment" id="id_comment" name="comment" type="text" value="blah" /></p>'
-    ```
+In [76]: form.as_p()
+Out[76]: u'<p><label for="id_comment">Comment:</label> <input data-id="12345" data-type="comment" id="id_comment" name="comment" type="text" value="blah" /></p>'
+```
+
 So it's clear the developer has to carefully know what they can and cannot pass into `Field` versus `Widget` subclasses.
 
 I would prefer to pass all initialization options into one constructor.
 
-    ```python
-    form.fields['comment'] = zTextInput(**{
-        'initial': 'blah2',
-        'required': False,
-        'data_attrs': { 'id': 1234, 'type': 'comment' }
-    })
-    ```
+```python
+form.fields['comment'] = zTextInput(**{
+    'initial': 'blah2',
+    'required': False,
+    'data_attrs': { 'id': 1234, 'type': 'comment' }
+})
+```
 
 ## Getting Started
 
